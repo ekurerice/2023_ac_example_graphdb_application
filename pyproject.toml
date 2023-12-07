@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "2023-ac-example-graphdb-application"
+version = "0.1.0"
+description = ""
+authors = ["ekurerice <alexandria.rindybell@gmail.com>"]
+readme = "README.md"
+packages = [{include = "2023_ac_example_graphdb_application"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pytest = "^7.4.3"
+pytest-asyncio = "^0.23.2"
+async-asgi-testclient = "^1.4.11"
+fastapi = "^0.104.1"
+gremlinpython = "^3.7.1"
+pytest-cov = "^4.1.0"
+pytest-docker = "^2.0.1"
+pytest-mock = "^3.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "--cov=src --cov-report html"
+testpaths = ["tests"]
