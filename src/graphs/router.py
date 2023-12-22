@@ -27,7 +27,9 @@ async def create_vertex(input: Create.Vertex.Request):
 async def create_edge(input: Create.Edge.Request):
     logging.info(input)
     dao = CompanyKnowledgeGraphDAO(reader_endpoint=endpoint, writer_endpoint=endpoint)
-    _ = await run_in_threadpool(dao.create_edge, input.label, input.id, input.v1.id, input.v2.id)
+    _ = await run_in_threadpool(
+        dao.create_edge, input.label, input.id, input.v1.id, input.v2.id
+    )
     del dao
 
     return JSONResponse(Create.Edge.Response(id=input.id).dict(), status_code=201)
@@ -35,8 +37,17 @@ async def create_edge(input: Create.Edge.Request):
 
 @api_router.get("/graphs", response_model=Read.Graph.Response)
 async def read_graphs(input: Read.Graph.Request):
+    logging.info(input)
+
+    import numpy as np
+
+    x = np.random.random((10000, 10000)).astype(dtype=np.float64)
+    x.dot(x)
+
     dao = CompanyKnowledgeGraphDAO(reader_endpoint=endpoint, writer_endpoint=endpoint)
-    res = await run_in_threadpool(dao.read_graphs, input.label, input.data.key(), input.data.value())
+    res = await run_in_threadpool(
+        dao.read_graphs, input.label, input.data.key(), input.data.value()
+    )
     del dao
 
     response = Read.Graph.Response.transform_from_neptune_query_result(res)
