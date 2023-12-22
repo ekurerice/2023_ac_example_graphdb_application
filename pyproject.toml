@@ -18,6 +18,8 @@ pytest-docker = "^2.0.1"
 pytest-mock = "^3.12.0"
 memray = "^1.11.0"
 numpy = "1.24.0"
+pytest-monitor = "^1.6.6"
+pytest-memray = "^1.5.0"
 
 
 [build-system]
