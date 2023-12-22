@@ -39,10 +39,12 @@ async def create_edge(input: Create.Edge.Request):
 async def read_graphs(input: Read.Graph.Request):
     logging.info(input)
 
+    """
+    # Note: Allocating huge memories 
     import numpy as np
-
     x = np.random.random((10000, 10000)).astype(dtype=np.float64)
     x.dot(x)
+    """
 
     dao = CompanyKnowledgeGraphDAO(reader_endpoint=endpoint, writer_endpoint=endpoint)
     res = await run_in_threadpool(
